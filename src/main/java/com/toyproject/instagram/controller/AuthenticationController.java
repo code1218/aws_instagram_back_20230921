@@ -1,6 +1,7 @@
 package com.toyproject.instagram.controller;
 
 import com.toyproject.instagram.dto.SignupReqDto;
+import com.toyproject.instagram.exception.SignupException;
 import com.toyproject.instagram.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class AuthenticationController {
             bindingResult.getFieldErrors().forEach(error -> {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             });
-            return ResponseEntity.badRequest().body(errorMap);
+            throw new SignupException(errorMap);
         }
 
         userService.signupUser(signupReqDto);
