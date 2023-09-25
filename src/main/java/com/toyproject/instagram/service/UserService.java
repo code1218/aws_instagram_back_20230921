@@ -1,6 +1,7 @@
 package com.toyproject.instagram.service;
 
 import com.toyproject.instagram.dto.SignupReqDto;
+import com.toyproject.instagram.entity.User;
 import com.toyproject.instagram.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +15,8 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void signupUser(SignupReqDto signupReqDto) {
-        Integer executeCount = userMapper.saveUser(signupReqDto.toUserEntity(passwordEncoder));
+        User user = signupReqDto.toUserEntity(passwordEncoder);
+        Integer executeCount = userMapper.saveUser(user);
         System.out.println(executeCount);
     }
 }
