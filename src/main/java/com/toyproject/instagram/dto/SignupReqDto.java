@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 public class SignupReqDto {
 //    @NotBlank(message = "전화번호 또는 이메일은 공백일 수 없습니다.")
     @Pattern(regexp = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]*$|^[0-9]{11}+$", message = "이메일 또는 전화번호를 입력하세요.")
-    private String phoneAndEmail;
+    private String phoneOrEmail;
 
     @Pattern(regexp = "^[가-힣]{2,6}$", message = "이름은 한글만 입력할 수 있습니다.")
     private String name;
@@ -24,7 +24,7 @@ public class SignupReqDto {
 
     public User toUserEntity(BCryptPasswordEncoder passwordEncoder) {
         return User.builder()
-                .email(phoneAndEmail)
+                .email(phoneOrEmail)
                 .name(name)
                 .username(username)
                 .password(passwordEncoder.encode(password))
