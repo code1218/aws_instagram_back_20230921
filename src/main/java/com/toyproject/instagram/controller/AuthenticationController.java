@@ -42,9 +42,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("/authenticate")
-    public ResponseEntity<?> authenticate(@RequestHeader(value = "Authorization") String authorization) {
-
-        return ResponseEntity.ok(true);
+    public ResponseEntity<?> authenticate(@RequestHeader(value = "Authorization") String token) {
+        return ResponseEntity.ok(userService.authenticate(token));
     }
 
 }

@@ -40,7 +40,7 @@ public class UserService {
     public Boolean authenticate(String token) {
         String accessToken = jwtTokenProvider.convertToken(token);
         if(!jwtTokenProvider.validateToken(accessToken)) {
-            throw new JwtException("유효하지 않은 에세스 토큰입니다.");
+            throw new JwtException("사용자 정보가 만료되었습니다. 다시 로그인하세요.");
         }
         return true;
     }
